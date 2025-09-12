@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: paper_lib
+Version: 0.1
+Summary: A library for fetching and normalizing academic papers from various providers (Elsevier, arXiv, PRISM, etc.)
+Home-page: 
+Author: Maryam SAYAGH
+Author-email: maryamsayagho@gmail.com
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
