@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
-this_directory = Path(__file__).parent
-long_description = (this_directory / "README.md").read_text(encoding="utf-8")
+long_description=open("README.md", encoding="utf-8").read()
+long_description_content_type="text/markdown"
 
 setup(
     name="papex",
