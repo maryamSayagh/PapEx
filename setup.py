@@ -6,7 +6,7 @@ setup(
     description="A library for fetching and normalizing academic papers from various providers (Elsevier, arXiv, PRISM, etc.)",
     #long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    author="Maryam SAYAGH"
+    author="Maryam_SAYAGH"
     author_email="maryamsayagho@gmail.com",
     url="https://github.com/yourusername/paper_lib",
     packages=find_packages(),
