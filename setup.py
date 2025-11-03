@@ -4,8 +4,8 @@ long_description=open("README.md", encoding="utf-8").read()
 long_description_content_type="text/markdown"
 
 setup(
-    name="PapEx",
-    version="0.0.2",
+    name="papex",
+    version="0.0.3",
     description="A library for fetching and normalizing academic papers from various providers (Elsevier, arXiv, PRISM, etc.)",
     #long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
