@@ -9,7 +9,7 @@ setup(
     description="A library for fetching and normalizing academic papers from various providers (Elsevier, arXiv, PRISM, etc.)",
     #long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    author="maryamSayagh,
+    author="maryamSayagh",
     author_email="maryamsayagho@gmail.com",
     url="https://github.com/maryamSayagh/PapEx",
     packages=find_packages(),
