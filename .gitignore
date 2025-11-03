@@ -1,3 +1,5 @@
+#many of the frameworks here are not actually used in the package, but i added them in the purpose of future updates, it's extensive.
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -194,14 +196,10 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-# Cursor
-#  Cursor is an AI-powered code editor. `.cursorignore` specifies files/directories to
-#  exclude from AI features like autocomplete and code analysis. Recommended for sensitive data
-#  refer to https://docs.cursor.com/context/ignore-files
-.cursorignore
-.cursorindexingignore
 
-# Marimo
-marimo/_static/
-marimo/_lsp/
-__marimo__/
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+
