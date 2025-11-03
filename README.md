@@ -1,14 +1,30 @@
 ## 1. Project Overview
 
-This project is a package for extracting, classifying, and filtering academic papers from various scholarly sources, for literature review,comparative or meta analysis. It includes components for interacting with Google Scholar (through SerpAPI), Scopus (through pybliometrics), and Elsevier APIs, along with: TODO local journal filtering using GPT-based classification via OpenAI.
+PapEx is a powerful Python library designed to streamline the process of retrieving and standardizing academic paper metadata from diverse sources. Instead of writing custom logic for each provider (Elsevier, arXiv, IEEE, etc.), PapEx offers a unified, normalized interface for fetching data.
 
-**Key technologies:**
-- Python
-- pandas
-- OpenAI GPT API
-- SerpAPI
-- pybliometrics (Scopus)
-- (Elsevier client library)
+This means you can focus on data analysis, not data cleaning.
+
+## Key Features
+
+* **Unified API:** Use a single, consistent set of commands to query multiple academic providers.
+* **Normalized Output:** All fetched paper metadata (titles, authors, abstracts, DOIs, publication dates) are mapped to a **standard data structure**, eliminating inconsistencies between sources.
+* **Multi-Provider Support:** Currently supports and normalizes data from:
+    * **Elsevier**
+    * **arXiv**
+    * **IEEE**
+    * **PRISM**
+    * *\[Add any other providers you support]*
+* **Flexible Querying:** Search papers by DOI, title, author, or specific metadata fields.
+
+---
+
+## 🛠️ Installation
+
+Use pip to install the library:
+
+```bash
+pip install papex
+```  
 
 **High-level architecture:**
 - Modular extractors for different data providers (Google Scholar, Scopus, Elsevier)
@@ -18,108 +34,62 @@ TODO extraction of section scraping (by summary, whole document etc..)
 
 ---
 
+
 ## 2. Getting Started
 ### Prerequisites
 - Python 3.10+
 - `pip` package manager
-- API keys for SerpAPI, Scopus (configured for pybliometrics), Elsevier, and OpenAI..
+- API keys for SerpAPI, Scopus (configured for pybliometrics), Elsevier, and IEEE..
 
 ### Installation
+**From PyPi**
+```bash
+pip install papex
+```
+
 ```bash
 pip install -r review/requirements.txt
+pip install -r review/requirements_dev.txt
 ```
 (You may need to manually install proprietary/specialized libraries referenced in the code, such as `serpapi`, `pybliometrics`, or a specific Elsevier client. See code comments for guidance.)
 
-### Usage Example
-- Run extractors as Python scripts or import their classes in notebooks / workflows
-- Example (from a notebook):
-    ```python
-    from Scripts.drop_extract_papers import main
-    df = main(query="machine learning bias", api_key=API_KEY, provider="scopus")
-    print(df.head())
-    ```
-- For journal filtering using GPT (see `journal_filter_gpt.py`):
-    ```python
-    import openai
-    from Scripts.journal_filter_gpt import filter_journal_dataframe
-    df_filtered = filter_journal_dataframe(df, client=openai.OpenAI(...), column_names=[...], context_text="...")
-    ```
+
 ### Running Tests
 - tests/`
-
 ---
 
-## 3. Project Structure
-
-- **review/Scripts/extract_papers.py**
-  Entry point & implementations for extracting papers from Google Scholar, Scopus, and Elsevier. Includes abstract `PaperExtractor` interface and provider-specific classes.
-- **review/Scripts/paper.py**
-  Core `Paper` data structure with serialization and helper methods.
-- **review/Scripts/journal_filter_gpt.py**
-  Filtering/cleaning utilities utilizing OpenAI GPT for classification of journals or other metadata.
-- **review/Scripts/bias_scopus.ipynb**
-  Jupyter exploratory analysis (Scopus lists, filtering logic, demo)
-- **review/data/**
-  Source and processed CSV/XLSX paper/journal/lists data
-- **review/requirements.txt**
-  Python dependency list (not always complete)
 
 **Important config files:**
 - `review/requirements.txt` — Python dependencies
 - `.env`/local API key config — not directly present but referenced in code
 
----
-
-## 4. Development Workflow
-- **Coding Standards:**
-  Follow PEP8 and SOLID principles for class design (see code comments).
-- **Testing:**
-  Tests files are grouped
-- **Build/Deployment:**
-  Not automated; recommend using a Makefile or simple bash scripts for routine tasks.
-
 
 ---
+## 3. How PaPex works 
+PapEx uses two main components to achieve normalization:
+| Abstraction | Description |
+| :--- | :--- |
+| **`Provider`** | An object dedicated to communicating with a **single source** (e.g., `arXivProvider`). It handles API-specific request formatting and initial data retrieval. |
+| **`Adapter/Normalizer`** | An object that takes the raw data from a `Provider` and transforms it into the **standard `Paper` object**, ensuring consistent field names and formats. |
 
-## 5. Key Concepts
+---
+
+## 4. Key Concepts
 - **Paper extraction:**
   Modular, provider-driven approach to acquiring structured paper metadata
 - **Abstraction layer:**
   Interfaces and base classes minimize duplication/spaghetti code
-- **GPT-based filtering:**
-  Large language model inference is used to handle ambiguous/subjective filtering
+- **LLM-based filtering:**
+  Large language model inference is used to handle ambiguous/subjective filtering.
+  This one isn't included in the package. However, in the case of **literature review** I suggest filtering only the relevant journals before starting the papers retrieval, to avoid reaching the API calls quota.
 - **Chunked processing:**
-  Large lists broken into smaller groups for manageable GPT API calls
+  TODO Batch scraping 
 
 ---
 
-## 6. Common Tasks
-- **Extract papers from a provider:**
-  Use `main()` in `extract_papers.py`; specify provider (`googlescholar`, `scopus`, `elsevier`)
-- **Add a new extractor/provider:**
-  Inherit from `PaperExtractor`, add to `EXTRACTORS` dictionary
-- **Filter a DataFrame of journals:**
-  Use `filter_journal_dataframe()` with required client/context/columns
-- **Extend paper features:**
-  Modify `Paper` in `paper.py` (add fields/methods as required)
 
----
-
-## 7. Troubleshooting
-- **ImportError for provider APIs:**
-  Install missing library or check import path per error message
-- **OpenAI API errors:**
-  Ensure API key is set & correct, check quota, and test with trivial prompt
-- **Incomplete data extraction:**
-  Some APIs rate-limit or restrict output—try smaller batch sizes/queries
-- **Missing/extra dependencies:**
-  `requirements.txt` may need syncing with your environment!
-
----
-
-## 8. References
+## 5. References
 - [pandas Documentation](https://pandas.pydata.org/)
-- [OpenAI API](https://platform.openai.com/docs/)
 - [pybliometrics](https://pybliometrics.readthedocs.io/en/stable/)
 - [SerpAPI (Google Scholar)](https://serpapi.com/)
 - Elsevier API Docs: See client library documentation
