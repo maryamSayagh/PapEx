@@ -1,6 +1,6 @@
 ## 1. Project Overview
 
-This project is a framework for extracting, classifying, and filtering academic papers from various scholarly sources, for literature review or bias analysis. It includes components for interacting with Google Scholar (through SerpAPI), Scopus (through pybliometrics), and Elsevier APIs, along with local journal filtering using GPT-based classification via OpenAI.
+This project is a package for extracting, classifying, and filtering academic papers from various scholarly sources, for literature review,comparative or meta analysis. It includes components for interacting with Google Scholar (through SerpAPI), Scopus (through pybliometrics), and Elsevier APIs, along with: TODO local journal filtering using GPT-based classification via OpenAI.
 
 **Key technologies:**
 - Python
@@ -13,8 +13,8 @@ This project is a framework for extracting, classifying, and filtering academic 
 **High-level architecture:**
 - Modular extractors for different data providers (Google Scholar, Scopus, Elsevier)
 - Shared abstraction layer for paper data
-- GPT-driven data cleaning/classification tools
-- Jupyter Notebooks for exploratory analysis
+- Paper extraction by query, retrieving meta data (author, title, ..)
+TODO extraction of section scraping (by summary, whole document etc..)
 
 ---
 
@@ -22,7 +22,7 @@ This project is a framework for extracting, classifying, and filtering academic 
 ### Prerequisites
 - Python 3.10+
 - `pip` package manager
-- API keys for SerpAPI, Scopus (configured for pybliometrics), Elsevier, and OpenAI
+- API keys for SerpAPI, Scopus (configured for pybliometrics), Elsevier, and OpenAI..
 
 ### Installation
 ```bash
